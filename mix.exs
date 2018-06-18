@@ -38,7 +38,7 @@ defmodule Amethyst.MixProject do
       main: "readme",
       source_ref: "v0.1.0",
       logo: "logo.png",
-      source_url: "",
+      source_url: "https://github.com/fschuindt/amethyst",
       extras: [
         "README.md",
         "apps/database/Database.md",
