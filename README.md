@@ -116,7 +116,7 @@ $ docker-compose run --rm amethyst bin/amethyst migrate
 
 Start the application:
 ```
-$ docker-compose up amethyst
+$ docker-compose up -d amethyst
 ```
 
 At this point you should be able to access: [http://localhost:7171/graphiql](http://localhost:7171/graphiql).
