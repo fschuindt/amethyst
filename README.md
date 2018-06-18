@@ -8,6 +8,8 @@ By keeping a daily-based assets movements logbook it offers the user a wide rang
 
 It's developed as a Elixir umbrella application, stores its data in a PostgreSQL database with the help of [Ecto](https://hexdocs.pm/ecto/Ecto.html), serves a [GraphQL API](https://graphql.org/) with [Absinthe](https://absinthe-graphql.org/) and runs over a [Docker Machine](https://docs.docker.com/machine/overview/) droplet inside [Digital Ocean](https://www.digitalocean.com/).
 
+Check the [System Diagram](https://s15.postimg.cc/pgrsocgmz/amethyst_1.png).
+
 It also uses [Distillery](https://hexdocs.pm/distillery/) to set up a compiled BEAM release into production. So while running it lacks the Mix environment and act solely as [OTP Application](http://erlang.org/doc/man/application.html). That being said, there's no Elixir installed at the production environment, just BEAM and [ERTS](http://erlang.org/doc/apps/erts/index.html).
 
 And that's why there's two `FROM` statements inside a single Dockerfile. Which is a fairly common practice for compiling and releasing Mix applications into OTP ones.
