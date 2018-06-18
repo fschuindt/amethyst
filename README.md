@@ -99,7 +99,12 @@ In order to setup Amethyst into Docker, we will release it. This guide covers it
 
 *Be sure to get into Amethyst directory.*
 
-Start Postgres:
+First, set your local `prod.env` file by:
+```
+$ cp prod.env.sample prod.env
+```
+
+Then, start Postgres:
 ```
 $ docker-compose up -d database
 ```
