@@ -26,10 +26,10 @@ defmodule Amethyst.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     [
-      {:dialyxir, "~> 0.5", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.16", only: :dev, runtime: false},
+      {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.16", only: [:dev, :test], runtime: false},
       {:distillery, "~> 1.5", runtime: false},
-      {:excoveralls, "~> 0.8", only: :test}
+      {:excoveralls, "~> 0.8", only: [:dev, :test]}
     ]
   end
 
