@@ -70,9 +70,14 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      # Migrate and Test
+      # Migrate
       - run: mix ecto.migrate
-      - run: mix test
+
+      # Test and Coverage report
+      - run: mix coveralls.json
+
+      # Upload report to codecov.io
+      - run: bash <(curl -s https://codecov.io/bash)
 
       - store_test_results:
           path: _build/test/results
