@@ -1,0 +1,78 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/postgres:10.4-alpine
+        environment:
+          POSTGRES_USER: amethyst
+          POSTGRES_DB: amethyst
+          POSTGRES_PASSWORD:
+
+      - image: circleci/elixir:1.6.5
+        environment:
+          MIX_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_DB: amethyst
+          POSTGRES_USER: amethyst
+          POSTGRES_PASSWORD:
+    working_directory: ~/amethyst
+    steps:
+      - checkout
+
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+
+      # Dependency Cache
+      - restore_cache:
+          keys:
+            - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - v1-mix-cache-{{ .Branch }}
+            - v1-mix-cache
+      - restore_cache:
+          keys:
+            - v1-build-cache-{{ .Branch }}
+            - v1-build-cache
+      - run: mix do deps.get, compile
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths: "deps"
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}
+          paths: "deps"
+      - save_cache:
+          key: v1-mix-cache
+          paths: "deps"
+      - save_cache:
+          key: v1-build-cache-{{ .Branch }}
+          paths: "_build"
+      - save_cache:
+          key: v1-build-cache
+          paths: "_build"
+
+      # Dialyzer and PLT Cache
+      - restore_cache:
+          keys:
+            - v1-plt-cache-{{ checksum "mix.lock" }}
+            - v1-plt-cache
+      - run:
+          name: Dialyzer
+          command: mix dialyzer --plt
+          environment:
+            MIX_ENV: dev
+      - save_cache:
+          key: v1-plt-cache-{{ checksum "mix.lock" }}
+          paths:
+            - _build
+            - ~/.mix
+
+      # Wait for Postgres
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # Migrate and Test
+      - run: mix ecto.migrate
+      - run: mix test
+
+      - store_test_results:
+          path: _build/test/results
