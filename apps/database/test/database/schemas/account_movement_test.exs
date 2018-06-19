@@ -37,8 +37,8 @@ defmodule DataBase.Schemas.AccountMovementTest do
 
       final_balance = D.sub(balance, amount)
 
-      Subject.build(account.id, amount, -1)
-      |> Subject.move
+      build = Subject.build(account.id, amount, -1)
+      Subject.move(build)
 
       assert :eq == D.cmp(final_balance, Account.balance(account))
     end
@@ -50,8 +50,8 @@ defmodule DataBase.Schemas.AccountMovementTest do
 
       final_balance = D.sub(balance, amount)
 
-      Subject.build(account.id, amount, -1)
-      |> Subject.move
+      build = Subject.build(account.id, amount, -1)
+      Subject.move(build)
 
       {:ok, report} = History.report(account, :total)
 
@@ -68,8 +68,8 @@ defmodule DataBase.Schemas.AccountMovementTest do
 
       final_balance = D.sub(balance, amount)
 
-      Subject.build(account.id, amount, -1)
-      |> Subject.move
+      build = Subject.build(account.id, amount, -1)
+      Subject.move(build)
 
       {:ok, report} = History.report(account, :total)
 

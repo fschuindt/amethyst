@@ -20,7 +20,8 @@ defmodule DataBase.Test.Support.Faker do
   """
   @spec amount(integer) :: D.t()
   def amount(factor \\ 1) do
-    :rand.uniform() + :rand.uniform(500)
+    500
+    |> rand_float()
     |> D.new()
     |> D.round(2)
     |> D.mult(factor)
@@ -46,5 +47,10 @@ defmodule DataBase.Test.Support.Faker do
     center
     |> Date.add((radius * -1))
     |> Date.range(Date.add(center, radius))
+  end
+
+  @spec rand_float(integer) :: float()
+  defp rand_float(max) do
+    :rand.uniform() + :rand.uniform(max)
   end
 end

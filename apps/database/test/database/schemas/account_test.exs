@@ -74,8 +74,8 @@ defmodule DataBase.Schemas.AccountTest do
       amount = Faker.amount
       account = SubjectFactory.blank
 
-      Movement.build(account.id, amount, 1)
-      |> Movement.move
+      build = Movement.build(account.id, amount, 1)
+      Movement.move(build)
 
       assert :eq == D.cmp(amount, Subject.balance(account))
     end

@@ -29,7 +29,8 @@ defmodule Amethyst.MixProject do
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.16", only: [:dev, :test], runtime: false},
       {:distillery, "~> 1.5", runtime: false},
-      {:excoveralls, "~> 0.8", only: [:dev, :test]}
+      {:excoveralls, "~> 0.8", only: [:dev, :test]},
+      {:credo, "~> 0.9.1", only: [:dev, :test], runtime: false}
     ]
   end
 

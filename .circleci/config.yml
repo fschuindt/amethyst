@@ -62,6 +62,9 @@ jobs:
             - _build
             - ~/.mix
 
+      # Static Code Analysis
+      - run: mix credo
+
       # Wait for Postgres
       - run:
           name: Wait for DB
