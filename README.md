@@ -1,4 +1,5 @@
 # Amethyst
+[![CircleCI](https://circleci.com/gh/fschuindt/amethyst/tree/master.svg?style=svg)](https://circleci.com/gh/fschuindt/amethyst/tree/master) [![codecov](https://codecov.io/gh/fschuindt/amethyst/branch/master/graph/badge.svg)](https://codecov.io/gh/fschuindt/amethyst)
 
 [Online Documentation](http://104.131.80.76)
 
