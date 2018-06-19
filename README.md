@@ -96,6 +96,22 @@ $ eval $(cat dev.env)
 $ mix dialyzer
 ```
 
+### Static Code Analisys
+
+[Credo](https://github.com/rrrene/credo) can be used to give us a static analysis:
+```
+$ mix credo
+
+Checking 67 source files (this might take a while) ...
+
+Please report incorrect results: https://github.com/rrrene/credo/issues
+
+Analysis took 1 second (0.02s to load, 1.0s running checks)
+238 mods/funs, found no issues.
+```
+
+It's currently being performed during continuous integration with CircleCI.
+
 ## Containerized Setup
 
 The current Amethyst Docker container lacks the Mix environment. So at the present time testing is restrict to the [Native Setup](#native-setup).
