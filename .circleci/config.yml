@@ -55,11 +55,7 @@ jobs:
           keys:
             - v1-plt-cache-{{ checksum "mix.lock" }}
             - v1-plt-cache
-      - run:
-          name: Dialyzer
-          command: mix dialyzer --plt
-          environment:
-            MIX_ENV: dev
+      - run: mix dialyzer --plt
       - save_cache:
           key: v1-plt-cache-{{ checksum "mix.lock" }}
           paths:
