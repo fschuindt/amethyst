@@ -2,12 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/postgres:10.4-alpine
-        environment:
-          POSTGRES_USER: amethyst
-          POSTGRES_DB: amethyst
-          POSTGRES_PASSWORD:
-
       - image: circleci/elixir:1.6.5
         environment:
           MIX_ENV: test
@@ -15,12 +9,19 @@ jobs:
           POSTGRES_DB: amethyst
           POSTGRES_USER: amethyst
           POSTGRES_PASSWORD:
+
+      - image: circleci/postgres:10.4-alpine
+        environment:
+          POSTGRES_USER: amethyst
+          POSTGRES_DB: amethyst
+          POSTGRES_PASSWORD:
+
     working_directory: ~/amethyst
     steps:
       - checkout
 
-      # - run: mix local.hex --force
-      # - run: mix local.rebar --force
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
 
       # Dependency Cache
       - restore_cache:
