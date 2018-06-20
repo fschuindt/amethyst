@@ -36,6 +36,8 @@ Be sure to check the [Ametyst ExDoc documentation](http://104.131.80.76) page fo
 *All functions describe [Typespecs](https://hexdocs.pm/elixir/typespecs.html) for agreements with [Dialyzer](http://erlang.org/doc/man/dialyzer.html).*  
 *Every module has its [ExUnit](https://hexdocs.pm/ex_unit/ExUnit.html) counterpart, although automated analysis with [ExCoveralls](https://github.com/parroty/excoveralls) reports over 77%, in practical terms it can be considered 100%. Check the report [here](http://104.131.80.76/cover/excoveralls.html).*
 
+Also, at production environment [Sentry](https://sentry.io/fschuindt/amethyst/) is being used to track runtime exceptions.
+
 ## Relevant Pages
 - [`:database` OTP Application](http://104.131.80.76/database.html)
 - [`:teller` OTP Application](http://104.131.80.76/teller.html)
