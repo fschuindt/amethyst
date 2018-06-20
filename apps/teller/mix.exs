@@ -19,7 +19,13 @@ defmodule Teller.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :cowboy, :plug, :absinthe_plug],
+      extra_applications: [
+        :sentry,
+        :logger,
+        :cowboy,
+        :plug,
+        :absinthe_plug
+      ],
       mod: {Teller.Application, []}
     ]
   end
