@@ -7,7 +7,6 @@ defmodule DataBase.Schemas.Account do
   database table.
   """
 
-  import DateTime, only: [to_date: 1]
   import Ecto.Query
 
   use Ecto.Schema
