@@ -7,7 +7,7 @@ defmodule Amethyst.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Amethyst",
-      source_url: "https://github.com/USER/PROJECT",
+      source_url: "https://github.com/fschuindt/amethyst",
       docs: docs(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
@@ -30,7 +30,8 @@ defmodule Amethyst.MixProject do
       {:ex_doc, "~> 0.16", only: [:dev, :test], runtime: false},
       {:distillery, "~> 1.5", runtime: false},
       {:excoveralls, "~> 0.8", only: [:dev, :test]},
-      {:credo, "~> 0.9.1", only: [:dev, :test], runtime: false}
+      {:credo, "~> 0.9.1", only: [:dev, :test], runtime: false},
+      {:sentry, "~> 6.2.1"}
     ]
   end
 

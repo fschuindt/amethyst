@@ -34,7 +34,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.Date do
   @spec report(any, any) :: History.report_result_t()
 
   defp report(account, nil) do
-    History.report(account, today())
+    History.report(account, Date.utc_today)
   end
 
   defp report(account, %Date{} = date) do
@@ -43,10 +43,5 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.Date do
 
   defp report(_account, _period) do
     Error.invalid_input
-  end
-
-  @spec today() :: Date.t()
-  defp today do
-    DateTime.to_date(DateTime.utc_now())
   end
 end

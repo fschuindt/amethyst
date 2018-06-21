@@ -36,7 +36,7 @@ end
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"}d=bZi5|]MF|72p@m(R5/Asnz@9^(cL%I$D7@pJh}(p8[Da?9`bUBhI=9]&LYb3Y"
+  set cookie: :"${RELEASE_PROD_COOKIE}"
 end
 
 # You may define one or more releases in this file.
@@ -49,7 +49,8 @@ release :amethyst do
   set applications: [
     :runtime_tools,
     database: :permanent,
-    teller: :permanent
+    teller: :permanent,
+    parse_trans: :load
   ]
 
   set commands: [

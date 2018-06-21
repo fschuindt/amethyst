@@ -16,6 +16,9 @@ defmodule Teller.Application do
     ]
 
     opts = [strategy: :one_for_one, name: Teller.Supervisor]
+
+    :ok = :error_logger.add_report_handler(Sentry.Logger)
+
     Supervisor.start_link(children, opts)
   end
 end

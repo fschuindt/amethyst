@@ -9,6 +9,8 @@ defmodule Teller.Router do
   """
 
   use Plug.Router
+  use Plug.ErrorHandler
+  use Sentry.Plug
 
   plug Teller.Authorize
 

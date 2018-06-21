@@ -14,7 +14,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.PeriodTest do
   describe "account history period resolver" do
     test "requires authorization" do
       account = Factories.Accounts.opened
-      from = Faker.today
+      from = Date.utc_today
       to = Date.add(from, 10)
 
       query = """
@@ -34,7 +34,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.PeriodTest do
 
     test "reports over a from/to date pair" do
       account = Factories.Accounts.opened
-      from = Faker.today
+      from = Date.utc_today
       to = Date.add(from, 10)
 
       query = """

@@ -28,14 +28,6 @@ defmodule DataBase.Test.Support.Faker do
   end
 
   @doc """
-  The current `t:Date.t/0`.
-  """
-  @spec today() :: Date.t()
-  def today do
-    DateTime.to_date(DateTime.utc_now)
-  end
-
-  @doc """
   A radius/center based `t:Date.Range.t/0` generator.
 
   Given a positive integer (defaults to `5`) as radius and a
@@ -43,7 +35,7 @@ defmodule DataBase.Test.Support.Faker do
   respective `t:Date.Range.t/0`.
   """
   @spec date_range(integer, Date.t) :: Date.Range.t()
-  def date_range(radius \\ 5, center \\ today()) do
+  def date_range(radius \\ 5, center \\ Date.utc_today) do
     center
     |> Date.add((radius * -1))
     |> Date.range(Date.add(center, radius))

@@ -14,7 +14,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.MonthTest do
   describe "account history month resolver" do
     test "requires authorization" do
       account = Factories.Accounts.opened
-      {year, month, _day} = Date.to_erl(Faker.today)
+      {year, month, _day} = Date.to_erl(Date.utc_today)
 
       query = """
       {
@@ -33,7 +33,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.MonthTest do
 
     test "reports over a month/year pair" do
       account = Factories.Accounts.opened
-      {year, month, _day} = Date.to_erl(Faker.today)
+      {year, month, _day} = Date.to_erl(Date.utc_today)
 
       query = """
       {

@@ -126,7 +126,7 @@ defmodule DataBase.Schemas.AccountTest do
       inbounds = D.add(balance, amount)
       {:ok, _credit} = Subject.credit(account, amount)
 
-      result = Subject.inbounds_on(account.id, Faker.today)
+      result = Subject.inbounds_on(account.id, Date.utc_today)
 
       assert :eq == D.cmp(inbounds, result)
     end
@@ -142,7 +142,7 @@ defmodule DataBase.Schemas.AccountTest do
       {:ok, _debit} = Subject.debit(account, amount)
       {:ok, _debit} = Subject.debit(account, amount)
 
-      result = Subject.outbounds_on(account.id, Faker.today)
+      result = Subject.outbounds_on(account.id, Date.utc_today)
 
       assert :eq = D.cmp(outbounds, result)
     end
@@ -151,7 +151,7 @@ defmodule DataBase.Schemas.AccountTest do
   describe "early_balance/2" do
     test "returns the initial_balance of a given date" do
       account = SubjectFactory.opened
-      result = Subject.early_balance(account.id, Faker.today)
+      result = Subject.early_balance(account.id, Date.utc_today)
 
       assert :eq == D.cmp(0, result.initial_balance)
     end
