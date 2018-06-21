@@ -169,7 +169,7 @@ defmodule DataBase.Schemas.Account do
   defp range_today(nil), do: nil
 
   defp range_today(%Date{} = date) do
-    Date.range(date, to_date(DateTime.utc_now))
+    Date.range(date, Date.utc_today)
   end
 
   @spec opening_date(t) :: Date.t() | nil

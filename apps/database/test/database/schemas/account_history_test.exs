@@ -18,7 +18,7 @@ defmodule DataBase.Schemas.AccountHistoryTest do
 
       Subject.register(movement)
 
-      {:ok, report} = Subject.report(movement.account, Faker.today)
+      {:ok, report} = Subject.report(movement.account, Date.utc_today)
 
       assert :eq == D.cmp(movement.amount, report.final_balance)
       assert :eq == D.cmp(movement.amount, report.inbounds)
@@ -32,7 +32,7 @@ defmodule DataBase.Schemas.AccountHistoryTest do
       account = Factories.Accounts.opened
       balance = Account.balance(account)
 
-      {:ok, report} = Subject.report(account, Faker.today)
+      {:ok, report} = Subject.report(account, Date.utc_today)
 
       assert :eq == D.cmp(balance, report.final_balance)
       assert :eq == D.cmp(balance, report.inbounds)

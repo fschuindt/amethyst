@@ -101,7 +101,7 @@ defmodule DataBase.Schemas.AccountMovementTest do
       build = Subject.build(account.id, amount, 1)
       balance = Account.balance(account)
 
-      move_on = %{move_on: DateTime.to_date(DateTime.utc_now)}
+      move_on = %{move_on: Date.utc_today}
       movement = struct(build, move_on)
 
       inbounds_on = D.add(balance, amount)
@@ -117,7 +117,7 @@ defmodule DataBase.Schemas.AccountMovementTest do
       account = Factories.Accounts.opened
       build = Subject.build(account.id, amount, -1)
 
-      move_on = %{move_on: DateTime.to_date(DateTime.utc_now)}
+      move_on = %{move_on: Date.utc_today}
       movement = struct(build, move_on)
 
       result = Subject.outbounds_on(movement)

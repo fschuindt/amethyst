@@ -14,7 +14,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.DateTest do
   describe "account history date resolver" do
     test "requires authorization" do
       account = Factories.Accounts.opened
-      today = Faker.today
+      today = Date.utc_today
 
       query = """
       {
@@ -33,7 +33,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.DateTest do
 
     test "reports over a single date" do
       account = Factories.Accounts.opened
-      today = Faker.today
+      today = Date.utc_today
 
       query = """
       {
