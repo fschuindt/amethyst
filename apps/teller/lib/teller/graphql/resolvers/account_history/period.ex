@@ -34,7 +34,7 @@ defmodule Teller.GraphQL.Resolvers.AccountHistory.Period do
   @spec report(any, any, any) :: History.report_result_t()
 
   defp report(account, %Date{} = from, %Date{} = to) do
-    with true     <- (from < to),
+    with :lt      <- Date.compare(from, to),
          period   <- Date.range(from, to) do
       History.report(account, period)
     else
