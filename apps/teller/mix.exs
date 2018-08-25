@@ -34,7 +34,7 @@ defmodule Teller.MixProject do
   defp deps do
     [
       {:cowboy, "~> 2.4.0"},
-      {:plug, "~> 1.5.1"},
+      {:plug, "~> 1.6"},
       {:absinthe_plug, "~> 1.4.0"},
       {:database, in_umbrella: true}
     ]

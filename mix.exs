@@ -31,7 +31,7 @@ defmodule Amethyst.MixProject do
       {:distillery, "~> 1.5", runtime: false},
       {:excoveralls, "~> 0.8", only: [:dev, :test]},
       {:credo, "~> 0.9.1", only: [:dev, :test], runtime: false},
-      {:sentry, "~> 6.2.1"}
+      {:sentry, "~> 6.4"}
     ]
   end
 
