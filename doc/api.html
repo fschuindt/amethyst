@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.3">
+    <title>API – Amethyst vdev</title>
+    <link rel="stylesheet" href="dist/app-480ffdc169.css" />
+    
+    <script src="dist/sidebar_items-25fd4edb47.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+<div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="readme.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Amethyst
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        vdev
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="Amethyst" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+<h1>API</h1>
+<p>A set of examples to interact with the GraphQL API.</p>
+<h2 id="account-opening" class="section-heading">
+  <a href="#account-opening" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Account Opening
+</h2>
+
+<p>This endpoint provides the ability to open a new bank account.</p>
+<p>It will give you the required credentials to later perform authorization (<code class="inline">id</code> and <code class="inline">apiToken</code>). Be sure to save them.</p>
+<p><em>If you try to open a new account sending valid authorization headers it will prevent you to proceed.</em></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">mutation OpenAccount {
+  openAccount(name: &quot;Jon Lord&quot;) {
+    id
+    name
+    apiToken
+  }
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;openAccount&quot;: {
+      &quot;name&quot;: &quot;Jon Lord&quot;,
+      &quot;id&quot;: &quot;108&quot;,
+      &quot;apiToken&quot;: &quot;kmULONLCtLZCmwf0DBkNcFE3sRiGdAeKLJ1vCgTIcNf79KV0n2U&quot;
+    }
+  }
+}</code></pre>
+<h2 id="authorization" class="section-heading">
+  <a href="#authorization" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Authorization
+</h2>
+
+<p>From this point, all interactions will flag <strong>Requires Authorization</strong>, that means in order to proceed you shall provide authorization headers within the connection request.</p>
+<p>Be sure to provide the following headers:</p>
+<table>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left">Key</th><th style="text-align: left">Value</th>
+</tr>
+</thead>
+<tr>
+<td style="text-align: left"><code class="inline">account-id</code></td><td style="text-align: left">Your account <code class="inline">id</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">api-token</code></td><td style="text-align: left">Your account <code class="inline">apiToken</code>.</td>
+</tr>
+</table>
+<h2 id="assets-transfer" class="section-heading">
+  <a href="#assets-transfer" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Assets Transfer
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p>Allows you to transfer assets from the current authorized account to another registered account by passing its <code class="inline">id</code>.</p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">mutation AssetsTransfer {
+  assetsTransfer(recipientAccountId: 102, amount: 200) {
+    id
+    amount
+    transferAt
+    senderAccountId
+    recipientAccountId
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;assetsTransfer&quot;: {
+      &quot;transferAt&quot;: &quot;2018-06-12T13:39:03.769877Z&quot;,
+      &quot;senderAccountId&quot;: &quot;109&quot;,
+      &quot;recipientAccountId&quot;: &quot;102&quot;,
+      &quot;id&quot;: &quot;11&quot;,
+      &quot;amount&quot;: &quot;200&quot;
+    }
+  }
+}</code></pre>
+<h2 id="assets-withdraw" class="section-heading">
+  <a href="#assets-withdraw" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Assets Withdraw
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">mutation AssetsWithdraw {
+  assetsWithdraw(amount: 100.99) {
+    id
+    accountId
+    amount
+    direction
+    initialBalance
+    finalBalance
+    moveAt
+    moveOn
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;assetsWithdraw&quot;: {
+      &quot;moveOn&quot;: &quot;2018-06-12&quot;,
+      &quot;moveAt&quot;: &quot;2018-06-12T13:54:12.131650Z&quot;,
+      &quot;initialBalance&quot;: &quot;699.0100&quot;,
+      &quot;id&quot;: &quot;152&quot;,
+      &quot;finalBalance&quot;: &quot;598.0200&quot;,
+      &quot;direction&quot;: -1,
+      &quot;amount&quot;: &quot;100.99&quot;,
+      &quot;accountId&quot;: &quot;109&quot;
+    }
+  }
+}</code></pre>
+<h2 id="current-report" class="section-heading">
+  <a href="#current-report" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Current Report
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">{
+  dateReport {
+    date
+    initialBalance
+    finalBalance
+    inbounds
+    outbounds
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;dateReport&quot;: {
+      &quot;outbounds&quot;: &quot;401.9800&quot;,
+      &quot;initialBalance&quot;: &quot;0.0000&quot;,
+      &quot;inbounds&quot;: &quot;1000.0000&quot;,
+      &quot;finalBalance&quot;: &quot;598.0200&quot;,
+      &quot;date&quot;: &quot;2018-06-12&quot;,
+      &quot;accountId&quot;: &quot;109&quot;
+    }
+  }
+}</code></pre>
+<h2 id="date-report" class="section-heading">
+  <a href="#date-report" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Date Report
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">{
+  dateReport(date: &quot;2018-06-12&quot;) {
+    date
+    initialBalance
+    finalBalance
+    inbounds
+    outbounds
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;dateReport&quot;: {
+      &quot;outbounds&quot;: &quot;401.9800&quot;,
+      &quot;initialBalance&quot;: &quot;0.0000&quot;,
+      &quot;inbounds&quot;: &quot;1000.0000&quot;,
+      &quot;finalBalance&quot;: &quot;598.0200&quot;,
+      &quot;date&quot;: &quot;2018-06-12&quot;,
+      &quot;accountId&quot;: &quot;109&quot;
+    }
+  }
+}</code></pre>
+<h2 id="month-report" class="section-heading">
+  <a href="#month-report" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Month Report
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">{
+  monthReport(month: 6, year: 2018) {
+    initialBalance
+    finalBalance
+    inbounds
+    outbounds
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;monthReport&quot;: {
+      &quot;outbounds&quot;: &quot;401.9800&quot;,
+      &quot;initialBalance&quot;: &quot;0.0000&quot;,
+      &quot;inbounds&quot;: &quot;1000.0000&quot;,
+      &quot;finalBalance&quot;: &quot;598.0200&quot;
+    }
+  }
+}</code></pre>
+<h2 id="year-report" class="section-heading">
+  <a href="#year-report" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Year Report
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">{
+  yearReport(year: 2018) {
+    initialBalance
+    finalBalance
+    inbounds
+    outbounds
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;yearReport&quot;: {
+      &quot;outbounds&quot;: &quot;401.9800&quot;,
+      &quot;initialBalance&quot;: &quot;0.0000&quot;,
+      &quot;inbounds&quot;: &quot;1000.0000&quot;,
+      &quot;finalBalance&quot;: &quot;598.0200&quot;
+    }
+  }
+}</code></pre>
+<h2 id="period-report" class="section-heading">
+  <a href="#period-report" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Period Report
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">{
+  periodReport(from: &quot;2018-06-05&quot;, to: &quot;2018-06-12&quot;) {
+    initialBalance
+    finalBalance
+    inbounds
+    outbounds
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;periodReport&quot;: {
+      &quot;outbounds&quot;: &quot;401.9800&quot;,
+      &quot;initialBalance&quot;: &quot;0.0000&quot;,
+      &quot;inbounds&quot;: &quot;1000.0000&quot;,
+      &quot;finalBalance&quot;: &quot;598.0200&quot;
+    }
+  }
+}</code></pre>
+<h2 id="overall-report" class="section-heading">
+  <a href="#overall-report" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Overall Report
+</h2>
+
+<p><strong>Requires Authorization</strong></p>
+<p><strong>Input:</strong></p>
+<pre><code class="graphql">{
+  report {
+    initialBalance
+    finalBalance
+    inbounds
+    outbounds
+  }
+}</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="json">{
+  &quot;data&quot;: {
+    &quot;report&quot;: {
+      &quot;outbounds&quot;: &quot;401.9800&quot;,
+      &quot;initialBalance&quot;: &quot;0.0000&quot;,
+      &quot;inbounds&quot;: &quot;1000.0000&quot;,
+      &quot;finalBalance&quot;: &quot;598.0200&quot;
+    }
+  }
+}</code></pre>
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-9bd040e5e5.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+

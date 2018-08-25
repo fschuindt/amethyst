@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.3">
+    <title>Teller – Amethyst vdev</title>
+    <link rel="stylesheet" href="dist/app-480ffdc169.css" />
+    
+    <script src="dist/sidebar_items-25fd4edb47.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+<div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="readme.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Amethyst
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        vdev
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="Amethyst" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+<h1>Teller</h1>
+<p>The second piece of our umbrella is the <code class="inline">:teller</code> application. It’s responsible for providing a GraphQL gateway to the <a href="database.html"><code class="inline">:database</code></a> application.</p>
+<p>For a complete set of examples to the GraphQL API, check <a href="api.html">API</a>.</p>
+<p>Or upload the <code class="inline">graphiql_workspace.json</code> file (at the root of the repository) to the <a href="http://localhost:7171/graphiql">GraphiQL endpoint</a>.</p>
+<h2 id="api-authorization" class="section-heading">
+  <a href="#api-authorization" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  API Authorization
+</h2>
+
+<p>My initial plan for authorization was to use <a href="https://github.com/ueberauth/guardian">Guardian</a> and provide a JWT based system. But in a attempt to speed up the first deliverance, I’ve opted to use a weak token.</p>
+<p>It’s weak for a number of reasons: Lack of TTL, plain text storage, faulty randomness. All on top of a plain text HTTP connection.</p>
+<p>But it may fit us for now. Improving it should be the next step.</p>
+<p>That said, here’s how to perform authorizations: <a href="api.html#authorization">Authorization</a>.</p>
+<h2 id="api-level-errors" class="section-heading">
+  <a href="#api-level-errors" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  API Level Errors
+</h2>
+
+<p>Check <a href="Teller.ErrorMessages.html"><code class="inline">Teller.ErrorMessages</code></a> for a complete set of GraphQL API leveled errors.</p>
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-9bd040e5e5.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+

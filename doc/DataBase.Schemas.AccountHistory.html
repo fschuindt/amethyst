@@ -1,0 +1,470 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.3">
+    <title>DataBase.Schemas.AccountHistory – Amethyst vdev</title>
+    <link rel="stylesheet" href="dist/app-480ffdc169.css" />
+    
+    <script src="dist/sidebar_items-25fd4edb47.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="readme.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Amethyst
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        vdev
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="Amethyst" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Amethyst vdev</small>
+        DataBase.Schemas.AccountHistory
+        
+          <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>The bank account daily logbook.</p>
+<p>It’s in charge to keep track of all
+<a href="DataBase.Schemas.AccountMovement.html#t:t/0"><code class="inline">DataBase.Schemas.AccountMovement.t/0</code></a> <code class="inline">:direction</code> and <code class="inline">:amount</code>
+of a <a href="DataBase.Schemas.Account.html#t:t/0"><code class="inline">DataBase.Schemas.Account.t/0</code></a> for each day.</p>
+<p>It acts as logbook. Expresses information over the
+<code class="inline">account_history</code> database table. Has its <code class="inline">:account_id</code> and <code class="inline">:date</code>
+acting both as a composite primary key.</p>
+<p>Provides functions to both register and report informations.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:query_result_t/0">query_result_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A standard Postgrex response to raw SQL queries</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:registering_data_t/0">registering_data_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Represents the overall shape for the registering input</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:report_range_t/0">report_range_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Represents the disposable report filters</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:report_result_t/0">report_result_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A standard Ecto response to <a href="DataBase.Schemas.AccountHistory.html#content"><code class="inline">DataBase.Schemas.AccountHistory</code></a> data
+insertion</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A <a href="DataBase.Schemas.AccountHistory.html#content"><code class="inline">DataBase.Schemas.AccountHistory</code></a> struct</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#register/1">register(movement)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Registers a given <a href="DataBase.Schemas.AccountMovement.html#t:t/0"><code class="inline">DataBase.Schemas.AccountMovement.t/0</code></a> to its
+respective <a href="#t:t/0"><code class="inline">t/0</code></a> logbook properly updating it</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#report/2">report(account, date)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Given a <a href="DataBase.Schemas.Account.html#t:t/0"><code class="inline">DataBase.Schemas.Account.t/0</code></a> and a <a href="#t:report_range_t/0"><code class="inline">report_range_t/0</code></a>,
+proceeds into filling a report over the requested period of time</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Types
+          </h1>
+          <div class="types-list">
+            <div class="detail" id="t:query_result_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:query_result_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">query_result_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L38" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>query_result_t() :: {:ok, <a href="https://hexdocs.pm/postgrex/0.13.5/Postgrex.Result.html#t:t/0">Postgrex.Result.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A standard Postgrex response to raw SQL queries.</p>
+<p>Represents the registering act response.
+See <a href="#register/1"><code class="inline">register/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:registering_data_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:registering_data_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">registering_data_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L43" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>registering_data_t() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>() | <a href="https://hexdocs.pm/elixir/Date.html#t:t/0">Date.t</a>() | <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>()]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Represents the overall shape for the registering input.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:report_range_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:report_range_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">report_range_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L48" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>report_range_t() :: :total | <a href="https://hexdocs.pm/elixir/Date.html#t:t/0">Date.t</a>() | <a href="https://hexdocs.pm/elixir/Date.Range.html#t:t/0">Date.Range.t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Represents the disposable report filters.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:report_result_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:report_result_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">report_result_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L54" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>report_result_t() :: {:ok, <a href="#t:t/0">t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A standard Ecto response to <a href="DataBase.Schemas.AccountHistory.html#content"><code class="inline">DataBase.Schemas.AccountHistory</code></a> data
+insertion.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L30" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>t() :: %DataBase.Schemas.AccountHistory{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  account: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  account_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  date: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  final_balance: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inbounds: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  initial_balance: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  outbounds: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A <a href="DataBase.Schemas.AccountHistory.html#content"><code class="inline">DataBase.Schemas.AccountHistory</code></a> struct.</p>
+
+  </section>
+</div>
+
+          </div>
+        </section>
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="register/1">
+  
+  
+  <div class="detail-header">
+    <a href="#register/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">register(movement)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L76" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>register(<a href="DataBase.Schemas.AccountMovement.html#t:t/0">DataBase.Schemas.AccountMovement.t</a>()) ::
+  <a href="DataBase.Schemas.AccountMovement.html#t:t/0">DataBase.Schemas.AccountMovement.t</a>() | :error</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Registers a given <a href="DataBase.Schemas.AccountMovement.html#t:t/0"><code class="inline">DataBase.Schemas.AccountMovement.t/0</code></a> to its
+respective <a href="#t:t/0"><code class="inline">t/0</code></a> logbook properly updating it.</p>
+<p>Creates a new one for the first
+<a href="DataBase.Schemas.AccountMovement.html#t:t/0"><code class="inline">DataBase.Schemas.AccountMovement.t/0</code></a> of each day.</p>
+
+  </section>
+</div>
+<div class="detail" id="report/2">
+  
+  
+  <div class="detail-header">
+    <a href="#report/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">report(account, date)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_history.ex#L99" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>report(<a href="DataBase.Schemas.Account.html#t:t/0">DataBase.Schemas.Account.t</a>(), <a href="#t:report_range_t/0">report_range_t</a>()) :: <a href="#t:report_result_t/0">report_result_t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Given a <a href="DataBase.Schemas.Account.html#t:t/0"><code class="inline">DataBase.Schemas.Account.t/0</code></a> and a <a href="#t:report_range_t/0"><code class="inline">report_range_t/0</code></a>,
+proceeds into filling a report over the requested period of time.</p>
+<p>Returns a <a href="#t:report_result_t/0"><code class="inline">report_result_t/0</code></a>. The report data is presented in
+a form of a single <a href="#t:t/0"><code class="inline">t/0</code></a>.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-9bd040e5e5.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+

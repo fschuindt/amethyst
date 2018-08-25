@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.3">
+    <title>Amethyst – Amethyst vdev</title>
+    <link rel="stylesheet" href="dist/app-480ffdc169.css" />
+    
+    <script src="dist/sidebar_items-25fd4edb47.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+<div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="readme.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Amethyst
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        vdev
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="Amethyst" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+<h1>Amethyst</h1>
+<p><a href="https://circleci.com/gh/fschuindt/amethyst/tree/master"><img src="https://circleci.com/gh/fschuindt/amethyst/tree/master.svg?style=svg" alt="CircleCI"/></a> <a href="https://codecov.io/gh/fschuindt/amethyst"><img src="https://codecov.io/gh/fschuindt/amethyst/branch/master/graph/badge.svg" alt="codecov"/></a></p>
+<p>Few notes first:</p>
+<ul>
+<li><p><em>This application used to be online on a Digital Ocean Docker Machine. But since I got approved into the Stone Payments hiring process it’s no longer online. It’s no more needed.</em></p>
+</li>
+<li><p><em>Check out the documentation iside the <code class="inline">doc</code> directory. It’s richer than this README file.</em></p>
+</li>
+</ul>
+<p>Amethyst is a persisted bank account service provider built as a corporate challenge proposed by the <a href="https://github.com/stone-payments">Stone Payments</a> to me in order to evaluate my Elixir advancements and as a opportunity to me to study and implement new concepts.</p>
+<p>By keeping a daily-based assets movements logbook it offers the user a wide range of options for reporting financial transactions over any period of time.</p>
+<p>It’s developed as a Elixir umbrella application, stores its data in a PostgreSQL database with the help of <a href="https://hexdocs.pm/ecto/Ecto.html">Ecto</a>, serves a <a href="https://graphql.org/">GraphQL API</a> with <a href="https://absinthe-graphql.org/">Absinthe</a> and used to run over a <a href="https://docs.docker.com/machine/overview/">Docker Machine</a> droplet inside <a href="https://www.digitalocean.com/">Digital Ocean</a>.</p>
+<p><img src="https://s15.postimg.cc/pgrsocgmz/amethyst_1.png" alt="System Diagram"/><br/><em>This image shows the old IP address it used to run over.</em></p>
+<p>It also uses <a href="https://hexdocs.pm/distillery/">Distillery</a> to set up a compiled BEAM release into production. So while running it lacks the Mix environment and act solely as <a href="http://erlang.org/doc/man/application.html">OTP Application</a>. That being said, there’s no Elixir installed at the production environment, just BEAM and <a href="http://erlang.org/doc/apps/erts/index.html">ERTS</a>.</p>
+<p>And that’s why there’s two <code class="inline">FROM</code> statements inside a single Dockerfile. It’s a multi-stage build, which is a fairly common practice for compiling and releasing Mix applications into OTP ones.</p>
+<p>A brief scheme for the production stack:</p>
+<table>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left">Container</th><th style="text-align: left">Description</th>
+</tr>
+</thead>
+<tr>
+<td style="text-align: left"><strong>database</strong></td><td style="text-align: left">Our PostgreSQL database.</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>docs</strong></td><td style="text-align: left">A <a href="https://www.lighttpd.net/">Lighttpd</a> server with our ExDoc files.</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>amethyst</strong></td><td style="text-align: left">Our OTP environment.</td>
+</tr>
+</table>
+<p>And we serve over:</p>
+<table>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left"></th><th style="text-align: left">Endpoint</th>
+</tr>
+</thead>
+<tr>
+<td style="text-align: left">GraphQL</td><td style="text-align: left"><code class="inline">localhost:7171</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><em>GraphiQL</em></td><td style="text-align: left"><a href="http://localhost:7171/graphiql">http://localhost:7171/graphiql</a></td>
+</tr>
+<tr>
+<td style="text-align: left">ExDoc</td><td style="text-align: left"><a href="http://localhost">http://localhost</a></td>
+</tr>
+</table>
+<p>Be sure to check the Ametyst ExDoc documentation page for in-depth insights on implementations and API usage guides. It also offers documentation for each umbrella application.</p>
+<p><em>All functions describe <a href="https://hexdocs.pm/elixir/typespecs.html">Typespecs</a> for agreements with <a href="http://erlang.org/doc/man/dialyzer.html">Dialyzer</a>.</em><br/><em>Every module has its <a href="https://hexdocs.pm/ex_unit/ExUnit.html">ExUnit</a> counterpart, although automated analysis with <a href="https://github.com/parroty/excoveralls">ExCoveralls</a> reports over 77%, in practical terms it can be considered 100%. Check the report <a href="http://104.131.80.76/cover/excoveralls.html">here</a>.</em></p>
+<p>Also, at production environment <a href="https://sentry.io/fschuindt/amethyst/">Sentry</a> is being used to track runtime exceptions.</p>
+<h2 id="how-to-access-exdoc-pages-documentation" class="section-heading">
+  <a href="#how-to-access-exdoc-pages-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  How to access ExDoc pages (Documentation)
+</h2>
+
+<p>In this repository, there’s a directory named <code class="inline">./doc/</code>, it contains our plain HTML ExDoc documentation pages. But for a better experience, you can simply run:</p>
+<pre><code class="elixir">$ docker-compose up -d docs</code></pre>
+<p>Then access the page at <a href="http://localhost/">http://localhost/</a>. I strongly recommend you to read it.</p>
+<p>If you want to use other port than <code class="inline">80</code>, simply change the <code class="inline">docs</code> port at the <code class="inline">docker-compose.yml</code> file.</p>
+<p><strong>Some relevant pages:</strong></p>
+<ul>
+<li><a href="http://localhost/database.html"><code class="inline">:database</code> OTP Application</a>
+</li>
+<li><a href="http://localhost/teller.html"><code class="inline">:teller</code> OTP Application</a>
+</li>
+<li><a href="http://localhost/api.html">API Usage</a>
+</li>
+</ul>
+<h2 id="native-setup" class="section-heading">
+  <a href="#native-setup" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Native Setup
+</h2>
+
+<p>This guide will cover how to set Amethyst running locally on your native Mix environment using Docker for our Postgres container.</p>
+<p>For a fully containerized set up, check <a href="#containerized-setup">Containerized Setup</a>.</p>
+<p><em>Be sure to get into Amethyst directory.</em></p>
+<p>First, let’s set our session variables and <code class="inline">MIX_ENV</code> to <code class="inline">dev</code>:</p>
+<pre><code class="elixir">$ eval $(cat dev.env)</code></pre>
+<p>Then start Postgres:</p>
+<pre><code class="elixir">$ docker-compose up -d database</code></pre>
+<p>Perform Ecto migrations:</p>
+<pre><code class="elixir">$ mix ecto.migrate</code></pre>
+<p>Start the application:</p>
+<pre><code class="elixir">$ iex -S mix</code></pre>
+<p>At this point you should be able to access: <a href="http://localhost:7171/graphiql">http://localhost:7171/graphiql</a>.</p>
+<h3 id="testing" class="section-heading">
+  <a href="#testing" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Testing
+</h3>
+
+<p>For testing I recommend setting up the test session variables with:</p>
+<pre><code class="elixir">$ eval $(cat test.env)</code></pre>
+<p>Then performing tests (requires the <code class="inline">database</code> container to be up):</p>
+<pre><code class="elixir">$ mix test</code></pre>
+<h3 id="typespecs-static-analysis-discrepancy-analyzer" class="section-heading">
+  <a href="#typespecs-static-analysis-discrepancy-analyzer" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Typespecs Static Analysis (Discrepancy Analyzer)
+</h3>
+
+<p>To run <a href="http://erlang.org/doc/man/dialyzer.html">Dialyzer</a> you can simply run <a href="https://github.com/jeremyjh/dialyxir">Dialyxir</a>:</p>
+<p>(It should run inside development environment)</p>
+<pre><code class="elixir">$ eval $(cat dev.env)</code></pre>
+<pre><code class="elixir">$ mix dialyzer</code></pre>
+<h3 id="static-code-analisys" class="section-heading">
+  <a href="#static-code-analisys" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Static Code Analisys
+</h3>
+
+<p><a href="https://github.com/rrrene/credo">Credo</a> can be used to give us a static analysis:</p>
+<pre><code class="elixir">$ mix credo
+
+Checking 67 source files (this might take a while) ...
+
+Please report incorrect results: https://github.com/rrrene/credo/issues
+
+Analysis took 1 second (0.02s to load, 1.0s running checks)
+238 mods/funs, found no issues.</code></pre>
+<p>It’s currently being performed during continuous integration with CircleCI.</p>
+<h2 id="containerized-setup" class="section-heading">
+  <a href="#containerized-setup" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Containerized Setup
+</h2>
+
+<p>The current Amethyst Docker container lacks the Mix environment. So at the present time testing is restrict to the <a href="#native-setup">Native Setup</a>.</p>
+<p>In order to setup Amethyst into Docker, we will release it. This guide covers it.</p>
+<p><em>Be sure to get into Amethyst directory.</em></p>
+<p>First, set your local <code class="inline">prod.env</code> file by:</p>
+<pre><code class="elixir">$ cp prod.env.sample prod.env</code></pre>
+<p>Then, start Postgres:</p>
+<pre><code class="elixir">$ docker-compose up -d database</code></pre>
+<p>Build our Dockerfile:</p>
+<pre><code class="elixir">$ docker-compose build amethyst</code></pre>
+<p>Run Ecto migrations:</p>
+<pre><code class="elixir">$ docker-compose run --rm amethyst bin/amethyst migrate</code></pre>
+<p>Start the application:</p>
+<pre><code class="elixir">$ docker-compose up -d amethyst</code></pre>
+<p>At this point you should be able to access: <a href="http://localhost:7171/graphiql">http://localhost:7171/graphiql</a>.</p>
+<h2 id="license" class="section-heading">
+  <a href="#license" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  License
+</h2>
+
+<p>This is a “study-only purpose” software developed by <a href="https://github.com/fschuindt/">fschuindt</a>.</p>
+<p>It’s available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-9bd040e5e5.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+

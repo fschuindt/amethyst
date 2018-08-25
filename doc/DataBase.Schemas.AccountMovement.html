@@ -1,0 +1,665 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.3">
+    <title>DataBase.Schemas.AccountMovement – Amethyst vdev</title>
+    <link rel="stylesheet" href="dist/app-480ffdc169.css" />
+    
+    <script src="dist/sidebar_items-25fd4edb47.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="readme.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Amethyst
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        vdev
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="Amethyst" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Amethyst vdev</small>
+        DataBase.Schemas.AccountMovement
+        
+          <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>The bank account funds movimentation.</p>
+<p>Every time a <a href="DataBase.Schemas.Account.html#t:t/0"><code class="inline">DataBase.Schemas.Account.t/0</code></a> adds or removes
+funds, it’s in other words: Inserting a new <a href="#t:t/0"><code class="inline">t/0</code></a>. Which are
+simply called <strong>Movements</strong>. They can add <em>(inbound)</em> or remove
+<em>(outbound)</em> funds.</p>
+<p>A <strong>Movement</strong> inbound/outbound is determined by its <code class="inline">:direction</code>
+(which is <code class="inline">1</code> for inbounds or <code class="inline">-1</code> for outbounds). So its <em>real
+amount</em> is represented by <code class="inline">direction * amount</code>, as its <code class="inline">:amount</code> is
+always positive regardless of direction.</p>
+<p>The act of registering a new movement to a
+<a href="DataBase.Schemas.Account.html#t:t/0"><code class="inline">DataBase.Schemas.Account.t/0</code></a> is called to <strong>move</strong> a movement.</p>
+<p>This moving operation ensures to set required internal values and
+to write/update its respective
+<a href="DataBase.Schemas.AccountHistory.html#t:t/0"><code class="inline">DataBase.Schemas.AccountHistory.t/0</code></a> logbook.</p>
+<p>See <a href="#move/1"><code class="inline">move/1</code></a>.</p>
+<p>Expresses information over the <code class="inline">account_movements</code> database table.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:initial_balance_t/0">initial_balance_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A map containing a <code class="inline">:initial_balance</code> key with a <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a>
+value. Or <code class="inline">nil</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:missing_values_t/0">missing_values_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A group of fields to be set after building a <a href="#t:t/0"><code class="inline">t/0</code></a>. Prior its
+insertion</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:precedent_assoc_t/0">precedent_assoc_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A group of fields that represents the association of a <a href="#t:t/0"><code class="inline">t/0</code></a> to
+the <a href="DataBase.Schemas.Account.html#t:t/0"><code class="inline">DataBase.Schemas.Account.t/0</code></a> last
+<a href="DataBase.Schemas.AccountMovement.html#t:t/0"><code class="inline">DataBase.Schemas.AccountMovement.t/0</code></a>. A.k.a. <em>previous
+movement</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:response_t/0">response_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A standard Ecto response to <a href="DataBase.Schemas.AccountMovement.html#content"><code class="inline">DataBase.Schemas.AccountMovement</code></a> data
+insertion</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A <a href="DataBase.Schemas.AccountMovement.html#content"><code class="inline">DataBase.Schemas.AccountMovement</code></a> struct</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#build/3">build(account_id, amount, direction)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Builds a <a href="#t:t/0"><code class="inline">t/0</code></a> over the given arguments</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#inbounds_on/1">inbounds_on(m)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>It’s a <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a> to represent the addition of
+<a href="DataBase.Schemas.AccountHistory.html#t:t/0"><code class="inline">DataBase.Schemas.AccountHistory.t/0</code></a> (logbook) <code class="inline">:inbounds_on</code>
+with the given <a href="#t:t/0"><code class="inline">t/0</code></a> <em>movement inbound value</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#initial_balance_for/1">initial_balance_for(movement)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>When a given <a href="#t:t/0"><code class="inline">t/0</code></a> is the first of its day, it returns the
+<a href="#t:t/0"><code class="inline">t/0</code></a> <code class="inline">:initial_balance</code>. Otherwise it returns the
+<a href="DataBase.Schemas.Account.html#early_balance/2"><code class="inline">DataBase.Schemas.Account.early_balance/2</code></a> <code class="inline">:initial_balance</code> for
+the given <a href="#t:t/0"><code class="inline">t/0</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#move/1">move(movement)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The only allowed way to register a <a href="#t:t/0"><code class="inline">t/0</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#outbounds_on/1">outbounds_on(m)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>It’s a <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a> to represent the addition of
+<a href="DataBase.Schemas.AccountHistory.html#t:t/0"><code class="inline">DataBase.Schemas.AccountHistory.t/0</code></a> (logbook) <code class="inline">:outbounds_on</code>
+with the given <a href="#t:t/0"><code class="inline">t/0</code></a> <em>movement outbound value</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#valid_amount?/1">valid_amount?(amount)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Determines if a given <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a> is greater than zero</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Types
+          </h1>
+          <div class="types-list">
+            <div class="detail" id="t:initial_balance_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:initial_balance_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">initial_balance_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L56" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>initial_balance_t() :: %{initial_balance: <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>()} | nil</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A map containing a <code class="inline">:initial_balance</code> key with a <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a>
+value. Or <code class="inline">nil</code>.</p>
+<p>It’s the representation for querying this specific field in the
+database.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:missing_values_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:missing_values_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">missing_values_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L62" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>missing_values_t() :: %{
+  move_on: <a href="https://hexdocs.pm/elixir/Date.html#t:t/0">Date.t</a>(),
+  move_at: <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>(),
+  initial_balance: <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>(),
+  final_balance: <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>()
+}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A group of fields to be set after building a <a href="#t:t/0"><code class="inline">t/0</code></a>. Prior its
+insertion.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:precedent_assoc_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:precedent_assoc_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">precedent_assoc_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L75" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>precedent_assoc_t() ::
+  nil | %{previous_movement_id: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), previous_movement: <a href="#t:t/0">t</a>()}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A group of fields that represents the association of a <a href="#t:t/0"><code class="inline">t/0</code></a> to
+the <a href="DataBase.Schemas.Account.html#t:t/0"><code class="inline">DataBase.Schemas.Account.t/0</code></a> last
+<a href="DataBase.Schemas.AccountMovement.html#t:t/0"><code class="inline">DataBase.Schemas.AccountMovement.t/0</code></a>. A.k.a. <em>previous
+movement</em>.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:response_t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:response_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">response_t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L47" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>response_t() :: {:ok, <a href="#t:t/0">t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A standard Ecto response to <a href="DataBase.Schemas.AccountMovement.html#content"><code class="inline">DataBase.Schemas.AccountMovement</code></a> data
+insertion.</p>
+
+  </section>
+</div>
+<div class="detail" id="t:t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L41" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>t() :: %DataBase.Schemas.AccountMovement{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  account: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  account_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  amount: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  direction: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  final_balance: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  initial_balance: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  move_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  move_on: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  previous_movement: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  previous_movement_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>A <a href="DataBase.Schemas.AccountMovement.html#content"><code class="inline">DataBase.Schemas.AccountMovement</code></a> struct.</p>
+
+  </section>
+</div>
+
+          </div>
+        </section>
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="build/3">
+  
+  
+  <div class="detail-header">
+    <a href="#build/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">build(account_id, amount, direction)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L98" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>build(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Builds a <a href="#t:t/0"><code class="inline">t/0</code></a> over the given arguments.</p>
+
+  </section>
+</div>
+<div class="detail" id="inbounds_on/1">
+  
+  
+  <div class="detail-header">
+    <a href="#inbounds_on/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">inbounds_on(m)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L141" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>inbounds_on(<a href="#t:t/0">t</a>()) :: <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>It’s a <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a> to represent the addition of
+<a href="DataBase.Schemas.AccountHistory.html#t:t/0"><code class="inline">DataBase.Schemas.AccountHistory.t/0</code></a> (logbook) <code class="inline">:inbounds_on</code>
+with the given <a href="#t:t/0"><code class="inline">t/0</code></a> <em>movement inbound value</em>.</p>
+<p>The <em>movement inbound value</em> is the <a href="#t:t/0"><code class="inline">t/0</code></a> <code class="inline">:amount</code> if it’s a
+inbound movement. Otherwise it’s zero.</p>
+
+  </section>
+</div>
+<div class="detail" id="initial_balance_for/1">
+  
+  
+  <div class="detail-header">
+    <a href="#initial_balance_for/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">initial_balance_for(movement)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L169" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>initial_balance_for(<a href="#t:t/0">t</a>()) :: <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>When a given <a href="#t:t/0"><code class="inline">t/0</code></a> is the first of its day, it returns the
+<a href="#t:t/0"><code class="inline">t/0</code></a> <code class="inline">:initial_balance</code>. Otherwise it returns the
+<a href="DataBase.Schemas.Account.html#early_balance/2"><code class="inline">DataBase.Schemas.Account.early_balance/2</code></a> <code class="inline">:initial_balance</code> for
+the given <a href="#t:t/0"><code class="inline">t/0</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="move/1">
+  
+  
+  <div class="detail-header">
+    <a href="#move/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">move(movement)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L116" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>move(<a href="#t:t/0">t</a>()) :: <a href="#t:response_t/0">response_t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>The only allowed way to register a <a href="#t:t/0"><code class="inline">t/0</code></a>.</p>
+<p>It will set its <em>previous movement</em> (if any), then compute its
+required internal values and register with the respective
+<a href="DataBase.Schemas.AccountHistory.html#t:t/0"><code class="inline">DataBase.Schemas.AccountHistory.t/0</code></a> logbook.</p>
+<p>Only after registering to the logbook the <a href="#t:t/0"><code class="inline">t/0</code></a> is inserted.</p>
+
+  </section>
+</div>
+<div class="detail" id="outbounds_on/1">
+  
+  
+  <div class="detail-header">
+    <a href="#outbounds_on/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">outbounds_on(m)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L156" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>outbounds_on(<a href="#t:t/0">t</a>()) :: <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>It’s a <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a> to represent the addition of
+<a href="DataBase.Schemas.AccountHistory.html#t:t/0"><code class="inline">DataBase.Schemas.AccountHistory.t/0</code></a> (logbook) <code class="inline">:outbounds_on</code>
+with the given <a href="#t:t/0"><code class="inline">t/0</code></a> <em>movement outbound value</em>.</p>
+<p>The <em>movement outbound value</em> is the <a href="#t:t/0"><code class="inline">t/0</code></a> <code class="inline">:amount</code> if it’s a
+outbound movement. Otherwise it’s zero.</p>
+
+  </section>
+</div>
+<div class="detail" id="valid_amount?/1">
+  
+  
+  <div class="detail-header">
+    <a href="#valid_amount?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">valid_amount?(amount)</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/database/lib/database/schemas/account_movement.ex#L128" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>valid_amount?(<a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0">Decimal.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Determines if a given <a href="https://hexdocs.pm/decimal/1.5.0/Decimal.html#t:t/0"><code class="inline">Decimal.t/0</code></a> is greater than zero.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-9bd040e5e5.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+

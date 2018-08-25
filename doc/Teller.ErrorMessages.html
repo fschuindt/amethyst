@@ -1,0 +1,480 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.3">
+    <title>Teller.ErrorMessages – Amethyst vdev</title>
+    <link rel="stylesheet" href="dist/app-480ffdc169.css" />
+    
+    <script src="dist/sidebar_items-25fd4edb47.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="readme.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Amethyst
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        vdev
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="Amethyst" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Amethyst vdev</small>
+        Teller.ErrorMessages
+        
+          <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>A collection of all API level error messages.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Usual error tuple with message</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#already_logged/0">already_logged()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>When the client provides API credentials for creating a account</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#insufficient_funds/0">insufficient_funds()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The <code class="inline">amount</code> is either invalid or greater than sender’s balance</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#invalid_input/0">invalid_input()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>API level error for invalid arguments</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#invalid_recipient/0">invalid_recipient()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Inexistent recipient account or wrong <code class="inline">recipientAccountId</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#operation_failed/0">operation_failed()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Unexpected internal error</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#required_input/0">required_input()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>API level error for missing required arguments</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#unauthorized/0">unauthorized()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Wrong or not provided API credentials</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Types
+          </h1>
+          <div class="types-list">
+            <div class="detail" id="t:t/0">
+  
+  
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <span class="signature">t()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L9" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>t() :: {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Usual error tuple with message.</p>
+
+  </section>
+</div>
+
+          </div>
+        </section>
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="already_logged/0">
+  
+  
+  <div class="detail-header">
+    <a href="#already_logged/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">already_logged()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L15" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>already_logged() :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>When the client provides API credentials for creating a account.</p>
+
+  </section>
+</div>
+<div class="detail" id="insufficient_funds/0">
+  
+  
+  <div class="detail-header">
+    <a href="#insufficient_funds/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">insufficient_funds()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L57" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>insufficient_funds() :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>The <code class="inline">amount</code> is either invalid or greater than sender’s balance.</p>
+<p>Zero or negative amounts are considered invalid.</p>
+
+  </section>
+</div>
+<div class="detail" id="invalid_input/0">
+  
+  
+  <div class="detail-header">
+    <a href="#invalid_input/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">invalid_input()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L39" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>invalid_input() :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>API level error for invalid arguments.</p>
+
+  </section>
+</div>
+<div class="detail" id="invalid_recipient/0">
+  
+  
+  <div class="detail-header">
+    <a href="#invalid_recipient/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">invalid_recipient()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L47" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>invalid_recipient() :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Inexistent recipient account or wrong <code class="inline">recipientAccountId</code>.</p>
+
+  </section>
+</div>
+<div class="detail" id="operation_failed/0">
+  
+  
+  <div class="detail-header">
+    <a href="#operation_failed/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">operation_failed()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L65" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>operation_failed() :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Unexpected internal error.</p>
+
+  </section>
+</div>
+<div class="detail" id="required_input/0">
+  
+  
+  <div class="detail-header">
+    <a href="#required_input/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">required_input()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L31" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>required_input() :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>API level error for missing required arguments.</p>
+
+  </section>
+</div>
+<div class="detail" id="unauthorized/0">
+  
+  
+  <div class="detail-header">
+    <a href="#unauthorized/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">unauthorized()</span>
+    
+      <a href="https://github.com/fschuindt/amethyst/blob/v0.1.0/apps/teller/lib/teller/error_messages.ex#L23" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>unauthorized() :: <a href="#t:t/0">t</a>()</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Wrong or not provided API credentials.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-9bd040e5e5.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+
