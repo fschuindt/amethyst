@@ -17,7 +17,7 @@ services:
   docs:
     image: sebp/lighttpd
     volumes:
-      - /home/docs/:/var/www/localhost/htdocs
+      - ./doc/:/var/www/localhost/htdocs
     ports:
       - "80:80"
   amethyst:
