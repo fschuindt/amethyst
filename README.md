@@ -1,19 +1,24 @@
 # Amethyst
 [![CircleCI](https://circleci.com/gh/fschuindt/amethyst/tree/master.svg?style=svg)](https://circleci.com/gh/fschuindt/amethyst/tree/master) [![codecov](https://codecov.io/gh/fschuindt/amethyst/branch/master/graph/badge.svg)](https://codecov.io/gh/fschuindt/amethyst)
 
-[Online Documentation](http://104.131.80.76)
+Few notes first:
+
+- *This application used to be online on a Digital Ocean Docker Machine. But since I got approved into the Stone Payments hiring process it's no longer online. It's no more needed.*
+
+- *Check out the documentation iside the `doc` directory. It's richer than this README file.*
 
 Amethyst is a persisted bank account service provider built as a corporate challenge proposed by the [Stone Payments](https://github.com/stone-payments) to me in order to evaluate my Elixir advancements and as a opportunity to me to study and implement new concepts.
 
 By keeping a daily-based assets movements logbook it offers the user a wide range of options for reporting financial transactions over any period of time.
 
-It's developed as a Elixir umbrella application, stores its data in a PostgreSQL database with the help of [Ecto](https://hexdocs.pm/ecto/Ecto.html), serves a [GraphQL API](https://graphql.org/) with [Absinthe](https://absinthe-graphql.org/) and runs over a [Docker Machine](https://docs.docker.com/machine/overview/) droplet inside [Digital Ocean](https://www.digitalocean.com/).
+It's developed as a Elixir umbrella application, stores its data in a PostgreSQL database with the help of [Ecto](https://hexdocs.pm/ecto/Ecto.html), serves a [GraphQL API](https://graphql.org/) with [Absinthe](https://absinthe-graphql.org/) and used to run over a [Docker Machine](https://docs.docker.com/machine/overview/) droplet inside [Digital Ocean](https://www.digitalocean.com/).
 
-Check the [System Diagram](https://s15.postimg.cc/pgrsocgmz/amethyst_1.png).
+![System Diagram](https://s15.postimg.cc/pgrsocgmz/amethyst_1.png)  
+*This image shows the old IP address it used to run over.*
 
 It also uses [Distillery](https://hexdocs.pm/distillery/) to set up a compiled BEAM release into production. So while running it lacks the Mix environment and act solely as [OTP Application](http://erlang.org/doc/man/application.html). That being said, there's no Elixir installed at the production environment, just BEAM and [ERTS](http://erlang.org/doc/apps/erts/index.html).
 
-And that's why there's two `FROM` statements inside a single Dockerfile. Which is a fairly common practice for compiling and releasing Mix applications into OTP ones.
+And that's why there's two `FROM` statements inside a single Dockerfile. It's a multi-stage build, which is a fairly common practice for compiling and releasing Mix applications into OTP ones.
 
 A brief scheme for the production stack:
 
@@ -27,21 +32,33 @@ And we serve over:
 
 |              | Endpoint                                                                 |
 |--------------|--------------------------------------------------------------------------|
-| GraphQL      | `104.131.80.76:7171`                                                  |
-| *GraphiQL*   | [http://104.131.80.76:7171/graphiql](http://104.131.80.76:7171/graphiql) |
-| ExDoc        | [http://104.131.80.76](http://104.131.80.76)                             |
+| GraphQL      | `localhost:7171`                                                       |
+| *GraphiQL*   | [http://localhost:7171/graphiql](http://localhost:7171/graphiql)         |
+| ExDoc        | [http://localhost](http://localhost)                                     |
 
-Be sure to check the [Ametyst ExDoc documentation](http://104.131.80.76) page for in-depth insights on implementations and API usage guides. It also offers documentation for each umbrella application.
+Be sure to check the Ametyst ExDoc documentation page for in-depth insights on implementations and API usage guides. It also offers documentation for each umbrella application.
 
 *All functions describe [Typespecs](https://hexdocs.pm/elixir/typespecs.html) for agreements with [Dialyzer](http://erlang.org/doc/man/dialyzer.html).*  
 *Every module has its [ExUnit](https://hexdocs.pm/ex_unit/ExUnit.html) counterpart, although automated analysis with [ExCoveralls](https://github.com/parroty/excoveralls) reports over 77%, in practical terms it can be considered 100%. Check the report [here](http://104.131.80.76/cover/excoveralls.html).*
 
 Also, at production environment [Sentry](https://sentry.io/fschuindt/amethyst/) is being used to track runtime exceptions.
 
-## Relevant Pages
-- [`:database` OTP Application](http://104.131.80.76/database.html)
-- [`:teller` OTP Application](http://104.131.80.76/teller.html)
-- [API Usage](http://104.131.80.76/api.html)
+## How to access ExDoc pages (Documentation)
+
+In this repository, there's a directory named `./doc/`, it contains our plain HTML ExDoc documentation pages. But for a better experience, you can simply run:
+
+```
+$ docker-compose up -d docs
+```
+
+Then access the page at [http://localhost/](http://localhost/). I strongly recommend you to read it.
+
+If you want to use other port than `80`, simply change the `docs` port at the `docker-compose.yml` file.
+
+**Some relevant pages:**
+- [`:database` OTP Application](http://localhost/database.html)
+- [`:teller` OTP Application](http://localhost/teller.html)
+- [API Usage](http://localhost/api.html)
 
 ## Native Setup
 

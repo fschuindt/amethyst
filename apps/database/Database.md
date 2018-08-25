@@ -16,7 +16,7 @@ See `DataBase.Schemas.AccountMovement`.
 
 ## Entity Relationship Diagram
 
-![ER](https://s15.postimg.cc/srlmb002j/image.png)
+![ER](images/er.png)
 
 ## Local Errors
 

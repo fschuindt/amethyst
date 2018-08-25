@@ -4,7 +4,7 @@ The second piece of our umbrella is the `:teller` application. It's responsible 
 
 For a complete set of examples to the GraphQL API, check [API](api.html).
 
-Or upload the `graphiql_workspace.json` file (at the root of the repository) to the [GraphiQL endpoint](http://104.131.80.76:7171/graphiql).
+Or upload the `graphiql_workspace.json` file (at the root of the repository) to the [GraphiQL endpoint](http://localhost:7171/graphiql).
 
 ## API Authorization
 
