@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: amethyst-service
+spec:
+  ports:
+    - port: 7171
+      targetPort: 7171
+      protocol: TCP
+      name: graphql
+  selector:
+    app: amethyst
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: amethyst-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: amethyst
+    spec:
+      containers:
+        - name: amethyst
+          image: amethyst_amethyst:latest
+          ports:
+            - containerPort: 7171
+          args: ["bash", "-c", "bin/amethyst foreground"]
+          env:
+            - name: REPLACE_OS_VARS
+              value: "true"
+            - name: RELEASE_PROD_COOKIE
+              value: "rel_prod_cookie"
+            - name: SENTRY_DSN
+              value: "sentry_error_tracking_dsn"
+            - name: POSTGRES_HOST
+              value: "database"
+            - name: POSTGRES_DB
+              value: "amethyst"
+            - name: POSTGRES_USER
+              value: "amethyst"
+            - name: POSTGRES_PASSWORD
+              value: ""
