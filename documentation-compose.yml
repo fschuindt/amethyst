@@ -1,0 +1,14 @@
+# This Docker Compose file shall only be used to create
+# a "amethyst_documentation" Docker image to be used
+# within Kubernetes. For all other purposes you can keep
+# using the regular docker-compose.yml file.
+
+version: '3'
+
+services:
+  documentation:
+    ports:
+      - "80:80"
+    build:
+      context: .
+      dockerfile: Documentation.Dockerfile
