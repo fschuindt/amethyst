@@ -1,31 +1,30 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: amethyst-service
+  name: amethyst-app
 spec:
+  type: NodePort
   ports:
-    - port: 7171
-      targetPort: 7171
+    - nodePort: 30071
+      port: 7171
       protocol: TCP
-      name: graphql
   selector:
-    app: amethyst
-  type: LoadBalancer
+    app: amethyst-app
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: amethyst-deployment
+  name: amethyst-app
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
-        app: amethyst
+        app: amethyst-app
     spec:
       containers:
         - name: amethyst
-          image: amethyst_amethyst:latest
+          image: localhost:5000/amethyst_app:latest
           ports:
             - containerPort: 7171
           args: ["bash", "-c", "bin/amethyst foreground"]

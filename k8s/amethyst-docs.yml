@@ -3,19 +3,19 @@ kind: Service
 metadata:
   name: amethyst-docs
 spec:
+  type: NodePort
   ports:
-    - port: 80
-      targetPort: 80
+    - nodePort: 30080
+      port: 80
       protocol: TCP
-      name: http
+      targetPort: 80
   selector:
     app: amethyst-docs
-  type: LoadBalancer
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: amethyst-docs-deployment
+  name: amethyst-docs
 spec:
   replicas: 1
   template:
@@ -23,17 +23,8 @@ spec:
       labels:
         app: amethyst-docs
     spec:
-      volumes:
-        - name: htdocs
-          hostPath:
-            path: /home/fschuindt/apps/stone/amethyst/doc
-            type: Directory
       containers:
         - name: docs
-          image: sebp/lighttpd
+          image: localhost:5000/amethyst_documentation:latest
           ports:
             - containerPort: 80
-          volumeMounts:
-            - mountPath: /var/www/localhost/htdocs
-              name: htdocs
-

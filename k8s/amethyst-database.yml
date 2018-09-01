@@ -1,21 +1,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: amethyst-database-service
+  name: amethyst-database
 spec:
+  type: LoadBalancer
   ports:
-    - port: 5432
+    - port: 30032
       targetPort: 5432
       protocol: TCP
-      name: postgres
   selector:
     app: amethyst-database
-  type: LoadBalancer
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: amethyst-database-deployment
+  name: amethyst-database
 spec:
   replicas: 1
   template:
@@ -23,22 +22,12 @@ spec:
       labels:
         app: amethyst-database
     spec:
-      volumes:
-        - name: pgdata
-          hostPath:
-            path: /home/fschuindt/apps/stone/amethyst/pgdata
-            type: Directory
       containers:
         - name: database
           image: postgres:10.4-alpine
           ports:
             - containerPort: 5432
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data/pgdata
-              name: pgdata
           env:
-            - name: PG_DATA
-              value: "/var/lib/postgresql/data/pgdata"
             - name: POSTGRES_HOST
               value: "database"
             - name: POSTGRES_DB
