@@ -20,3 +20,6 @@ erl_crash.dump
 
 # Ignore environment files
 prod.env
+
+# Ignore K8s Postgres data directory
+/pgdata/
